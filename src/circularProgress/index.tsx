@@ -10,6 +10,7 @@ import Animated, {
   useDerivedValue,
 } from "react-native-reanimated";
 import { CircularProgressProps } from "./types";
+import RnIcon from '../../../../components/RnIcon'
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 const AnimatedInput = Animated.createAnimatedComponent(TextInput);
@@ -144,7 +145,8 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
         ]}
       >
         {showProgressValue && (
-          <AnimatedInput
+          value !== 100 ? (
+            <AnimatedInput
             underlineColorAndroid={"transparent"}
             editable={false}
             defaultValue={`${valuePrefix}${initialValue}${valueSuffix}`}
@@ -154,7 +156,10 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
               dynamicStyles(styleProps).fromProps,
             ]}
             animatedProps={animatedTextProps}
-          />
+            />
+            ) : (
+              <RnIcon icon={'check'} color={'green'} size={10}/>
+            )
         )}
         {title && title !== "" ? (
           <Text
